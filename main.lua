@@ -22,36 +22,12 @@ end
 local Config = {
     DiscordLink = "https://discord.gg/ZhfcPxBvN",
     ValidKeys = {
-        "STEEL-ALPHA",
-        "STEEL-BRAVO",
-        "STEEL-CHARLIE",
-        "STEEL-DELTA",
-        "STEEL-ECHO",
-        "STEEL-FOXTROT",
-        "STEEL-GOLF",
-        "STEEL-HOTEL",
-        "STEEL-INDIA",
-        "STEEL-JULIET",
-        "STEEL-KILO",
-        "STEEL-LIMA",
-        "STEEL-MIKE",
-        "STEEL-NOVEMBER",
-        "STEEL-OSCAR",
-        "STEEL-PAPA",
-        "STEEL-QUEBEC",
-        "STEEL-ROMEO",
-        "STEEL-SIERRA",
-        "STEEL-TANGO",
-        "STEEL-UNIFORM",
-        "STEEL-VICTOR",
-        "STEEL-WHISKEY",
-        "STEEL-XRAY",
-        "STEEL-YANKEE",
-        "STEEL-ZULU",
-        "STEEL-OMEGA",
-        "STEEL-LEGEND",
-        "STEEL-PRIME",
-        "STEEL-ULTIMATE"
+        "STEEL-ALPHA", "STEEL-BRAVO", "STEEL-CHARLIE", "STEEL-DELTA", "STEEL-ECHO",
+        "STEEL-FOXTROT", "STEEL-GOLF", "STEEL-HOTEL", "STEEL-INDIA", "STEEL-JULIET",
+        "STEEL-KILO", "STEEL-LIMA", "STEEL-MIKE", "STEEL-NOVEMBER", "STEEL-OSCAR",
+        "STEEL-PAPA", "STEEL-QUEBEC", "STEEL-ROMEO", "STEEL-SIERRA", "STEEL-TANGO",
+        "STEEL-UNIFORM", "STEEL-VICTOR", "STEEL-WHISKEY", "STEEL-XRAY", "STEEL-YANKEE",
+        "STEEL-ZULU", "STEEL-OMEGA", "STEEL-LEGEND", "STEEL-PRIME", "STEEL-ULTIMATE"
     }
 }
 
@@ -138,7 +114,7 @@ KeyInput.Font = Enum.Font.Gotham
 KeyInput.TextSize = 15
 KeyInput.TextColor3 = Color3.new(1,1,1)
 KeyInput.ClearTextOnFocus = false
-KeyInput.Parent = KeyInput
+KeyInput.Parent = KeyFrame
 Instance.new("UICorner", KeyInput).CornerRadius = UDim.new(0, 8)
 
 local GetKeyBtn = Instance.new("TextButton")
