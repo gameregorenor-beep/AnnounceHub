@@ -1,8 +1,8 @@
 --[[
 📢 GLOBAL SERVER ANNOUNCEMENT HUB
-🔑 LIMITED KEYS: STEEL SERIES ONLY
-💬 Discord: https://discord.gg/ZhfcPxBvN
-⚠️ Educational use only
+🔑 Valid Keys: STEEL-ALPHA to STEEL-ULTIMATE
+💬 Official Discord: https://discord.gg/ZhfcPxBvN
+⚠️ For educational purposes only
 ]]
 
 -- Services
@@ -12,8 +12,8 @@ local LocalPlayer = Players.LocalPlayer
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
 -- Clean old UI
-if PlayerGui:FindFirstChild("GlobalAnnounceHub") then
-    PlayerGui.GlobalAnnounceHub:Destroy()
+if PlayerGui:FindFirstChild("SteelAnnounceHub") then
+    PlayerGui.SteelAnnounceHub:Destroy()
 end
 
 -- ==============================================
@@ -21,7 +21,6 @@ end
 -- ==============================================
 local Config = {
     DiscordLink = "https://discord.gg/ZhfcPxBvN",
-    -- ✅ EXACT KEYS YOU REQUESTED
     ValidKeys = {
         "STEEL-ALPHA",
         "STEEL-BRAVO",
@@ -58,14 +57,14 @@ local Config = {
 
 local State = {
     Unlocked = false,
-    UsedKeys = {} -- Prevents reusing the same key
+    UsedKeys = {}
 }
 
 -- ==============================================
 -- UI
 -- ==============================================
 local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "GlobalAnnounceHub"
+ScreenGui.Name = "SteelAnnounceHub"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.IgnoreGuiInset = true
 ScreenGui.Parent = PlayerGui
@@ -85,27 +84,29 @@ Instance.new("UICorner", OpenBtn).CornerRadius = UDim.new(1, 0)
 
 -- Main Window
 local MainFrame = Instance.new("Frame")
-MainFrame.Size = UDim2.new(0, 400, 0, 430)
-MainFrame.Position = UDim2.new(0.5, -200, 0.5, -215)
-MainFrame.BackgroundColor3 = Color3.fromRGB(20, 25, 35)
+MainFrame.Size = UDim2.new(0, 420, 0, 440)
+MainFrame.Position = UDim2.new(0.5, -210, 0.5, -220)
+MainFrame.BackgroundColor3 = Color3.fromRGB(22, 27, 36)
 MainFrame.Visible = false
 MainFrame.Active = true
 MainFrame.Draggable = true
 MainFrame.Parent = ScreenGui
 Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 12)
-Instance.new("UIStroke", MainFrame).Color = Color3.fromRGB(59, 130, 246)
-Instance.new("UIStroke", MainFrame).Thickness = 2
+local Stroke = Instance.new("UIStroke")
+Stroke.Color = Color3.fromRGB(59, 130, 246)
+Stroke.Thickness = 2
+Stroke.Parent = MainFrame
 
 -- Title
-local TitleLabel = Instance.new("TextLabel")
-TitleLabel.Size = UDim2.new(1, -20, 0, 50)
-TitleLabel.Position = UDim2.new(0, 10, 0, 5)
-TitleLabel.BackgroundTransparency = 1
-TitleLabel.Text = "🌐 GLOBAL SERVER ANNOUNCEMENT"
-TitleLabel.Font = Enum.Font.GothamBold
-TitleLabel.TextSize = 20
-TitleLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
-TitleLabel.Parent = MainFrame
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1, -20, 0, 50)
+Title.Position = UDim2.new(0, 10, 0, 5)
+Title.BackgroundTransparency = 1
+Title.Text = "🌐 GLOBAL SERVER ANNOUNCEMENT"
+Title.Font = Enum.Font.GothamBold
+Title.TextSize = 20
+Title.TextColor3 = Color3.fromRGB(255, 215, 0)
+Title.Parent = MainFrame
 
 -- ==============================================
 -- KEY SYSTEM
@@ -121,7 +122,7 @@ local KeyLabel = Instance.new("TextLabel")
 KeyLabel.Size = UDim2.new(1, -20, 0, 35)
 KeyLabel.Position = UDim2.new(0, 10, 0, 15)
 KeyLabel.BackgroundTransparency = 1
-KeyLabel.Text = "🔑 ENTER STEEL SERIES KEY TO UNLOCK"
+KeyLabel.Text = "🔑 ENTER STEEL KEY TO UNLOCK"
 KeyLabel.Font = Enum.Font.GothamBold
 KeyLabel.TextSize = 16
 KeyLabel.TextColor3 = Color3.new(1,1,1)
@@ -131,7 +132,7 @@ local KeyInput = Instance.new("TextBox")
 KeyInput.Size = UDim2.new(1, -30, 0, 50)
 KeyInput.Position = UDim2.new(0, 15, 0, 55)
 KeyInput.BackgroundColor3 = Color3.fromRGB(45, 50, 70)
-KeyInput.PlaceholderText = "Enter your STEEL-XXXX key..."
+KeyInput.PlaceholderText = "e.g. STEEL-ALPHA"
 KeyInput.Text = ""
 KeyInput.Font = Enum.Font.Gotham
 KeyInput.TextSize = 15
@@ -155,7 +156,7 @@ local UnlockBtn = Instance.new("TextButton")
 UnlockBtn.Size = UDim2.new(1, -30, 0, 45)
 UnlockBtn.Position = UDim2.new(0, 15, 0, 170)
 UnlockBtn.BackgroundColor3 = Color3.fromRGB(46, 204, 113)
-UnlockBtn.Text = "✅ UNLOCK ANNOUNCEMENT SYSTEM"
+UnlockBtn.Text = "✅ UNLOCK SYSTEM"
 UnlockBtn.Font = Enum.Font.GothamBold
 UnlockBtn.TextSize = 15
 UnlockBtn.TextColor3 = Color3.new(1,1,1)
@@ -177,7 +178,7 @@ local AnnounceLabel = Instance.new("TextLabel")
 AnnounceLabel.Size = UDim2.new(1, -20, 0, 35)
 AnnounceLabel.Position = UDim2.new(0, 10, 0, 15)
 AnnounceLabel.BackgroundTransparency = 1
-AnnounceLabel.Text = "📢 SERVER-WIDE ANNOUNCEMENT"
+AnnounceLabel.Text = "📢 SERVER ANNOUNCEMENT"
 AnnounceLabel.Font = Enum.Font.GothamBold
 AnnounceLabel.TextSize = 17
 AnnounceLabel.TextColor3 = Color3.fromRGB(46, 204, 113)
@@ -187,7 +188,7 @@ local AnnounceInput = Instance.new("TextBox")
 AnnounceInput.Size = UDim2.new(1, -30, 0, 120)
 AnnounceInput.Position = UDim2.new(0, 15, 0, 55)
 AnnounceInput.BackgroundColor3 = Color3.fromRGB(45, 50, 70)
-AnnounceInput.PlaceholderText = "Type your message here...\nExample: only 7k steaks left"
+AnnounceInput.PlaceholderText = "Type here... e.g. only 7k steaks left"
 AnnounceInput.Text = ""
 AnnounceInput.Font = Enum.Font.Gotham
 AnnounceInput.TextSize = 15
@@ -226,59 +227,36 @@ end)
 
 UnlockBtn.MouseButton1Click:Connect(function()
     local input = KeyInput.Text:upper():gsub("%s+", "")
-    
     if State.UsedKeys[input] then
-        StarterGui:SetCore("SendNotification", {
-            Title = "❌ KEY ALREADY USED",
-            Text = "Each STEEL key works only once!",
-            Duration = 3
-        })
+        StarterGui:SetCore("SendNotification", {Title = "❌ USED", Text = "This key is already used!", Duration = 3})
         return
     end
-
-    for _, validKey in ipairs(Config.ValidKeys) do
-        if input == validKey then
+    for _, key in ipairs(Config.ValidKeys) do
+        if input == key then
             State.UsedKeys[input] = true
             State.Unlocked = true
-            StarterGui:SetCore("SendNotification", {
-                Title = "✅ UNLOCKED SUCCESSFULLY",
-                Text = "You can now send announcements!",
-                Duration = 3
-            })
+            StarterGui:SetCore("SendNotification", {Title = "✅ UNLOCKED", Text = "Ready to send announcements!", Duration = 3})
             KeyFrame.Visible = false
             AnnounceFrame.Visible = true
             return
         end
     end
-
-    StarterGui:SetCore("SendNotification", {
-        Title = "❌ INVALID KEY",
-        Text = "Use only a valid STEEL-XXXX key!",
-        Duration = 3
-    })
+    StarterGui:SetCore("SendNotification", {Title = "❌ INVALID KEY", Text = "Use a valid STEEL- key!", Duration = 3})
 end)
 
 SendBtn.MouseButton1Click:Connect(function()
     if not State.Unlocked then return end
-    
-    local message = AnnounceInput.Text
-    if message == "" then
-        StarterGui:SetCore("SendNotification", {
-            Title = "⚠️ EMPTY MESSAGE",
-            Text = "Please enter text first!",
-            Duration = 2
-        })
+    local msg = AnnounceInput.Text
+    if msg == "" then
+        StarterGui:SetCore("SendNotification", {Title = "⚠️ EMPTY", Text = "Type a message first!", Duration = 2})
         return
     end
-
-    -- Shows as official global server notice
     StarterGui:SetCore("SendNotification", {
         Title = "🌐 GLOBAL SERVER ANNOUNCEMENT",
-        Text = message,
+        Text = msg,
         Duration = 7
     })
-
     AnnounceInput.Text = ""
 end)
 
-print("✅ 📢 Global Announce Hub Loaded | STEEL Keys Enabled")
+print("✅ STEEL ANNOUNCE HUB LOADED")
