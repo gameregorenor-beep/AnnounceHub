@@ -1,8 +1,8 @@
 --[[
 📢 GLOBAL SERVER ANNOUNCEMENT HUB
-🔑 Valid Keys: STEEL-ALPHA to STEEL-ULTIMATE
-💬 Official Discord: https://discord.gg/ZhfcPxBvN
-⚠️ Educational use only
+🔑 Valid Keys: STEEL-ALPHA → STEEL-ULTIMATE
+💬 Discord: https://discord.gg/ZhfcPxBvN
+⚠️ Educational purpose only
 ]]
 
 -- Services
@@ -11,7 +11,7 @@ local StarterGui = game:GetService("StarterGui")
 local LocalPlayer = Players.LocalPlayer
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
--- Clean old UI
+-- Remove old version
 if PlayerGui:FindFirstChild("SteelAnnounceHub") then
     PlayerGui.SteelAnnounceHub:Destroy()
 end
@@ -22,22 +22,46 @@ end
 local Config = {
     DiscordLink = "https://discord.gg/ZhfcPxBvN",
     ValidKeys = {
-        "STEEL-ALPHA", "STEEL-BRAVO", "STEEL-CHARLIE", "STEEL-DELTA", "STEEL-ECHO",
-        "STEEL-FOXTROT", "STEEL-GOLF", "STEEL-HOTEL", "STEEL-INDIA", "STEEL-JULIET",
-        "STEEL-KILO", "STEEL-LIMA", "STEEL-MIKE", "STEEL-NOVEMBER", "STEEL-OSCAR",
-        "STEEL-PAPA", "STEEL-QUEBEC", "STEEL-ROMEO", "STEEL-SIERRA", "STEEL-TANGO",
-        "STEEL-UNIFORM", "STEEL-VICTOR", "STEEL-WHISKEY", "STEEL-XRAY", "STEEL-YANKEE",
-        "STEEL-ZULU", "STEEL-OMEGA", "STEEL-LEGEND", "STEEL-PRIME", "STEEL-ULTIMATE"
+        "STEEL-ALPHA",
+        "STEEL-BRAVO",
+        "STEEL-CHARLIE",
+        "STEEL-DELTA",
+        "STEEL-ECHO",
+        "STEEL-FOXTROT",
+        "STEEL-GOLF",
+        "STEEL-HOTEL",
+        "STEEL-INDIA",
+        "STEEL-JULIET",
+        "STEEL-KILO",
+        "STEEL-LIMA",
+        "STEEL-MIKE",
+        "STEEL-NOVEMBER",
+        "STEEL-OSCAR",
+        "STEEL-PAPA",
+        "STEEL-QUEBEC",
+        "STEEL-ROMEO",
+        "STEEL-SIERRA",
+        "STEEL-TANGO",
+        "STEEL-UNIFORM",
+        "STEEL-VICTOR",
+        "STEEL-WHISKEY",
+        "STEEL-XRAY",
+        "STEEL-YANKEE",
+        "STEEL-ZULU",
+        "STEEL-OMEGA",
+        "STEEL-LEGEND",
+        "STEEL-PRIME",
+        "STEEL-ULTIMATE"
     }
 }
 
 local State = {
     Unlocked = false,
-    UsedKeys = {}
+    UsedKeys = {} -- Prevents same key reuse
 }
 
 -- ==============================================
--- UI
+-- USER INTERFACE
 -- ==============================================
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "SteelAnnounceHub"
@@ -45,7 +69,7 @@ ScreenGui.ResetOnSpawn = false
 ScreenGui.IgnoreGuiInset = true
 ScreenGui.Parent = PlayerGui
 
--- Open Button
+-- Open/Close Button
 local OpenBtn = Instance.new("TextButton")
 OpenBtn.Size = UDim2.new(0, 60, 0, 60)
 OpenBtn.Position = UDim2.new(0.02, 0, 0.35, 0)
@@ -154,7 +178,7 @@ local AnnounceLabel = Instance.new("TextLabel")
 AnnounceLabel.Size = UDim2.new(1, -20, 0, 35)
 AnnounceLabel.Position = UDim2.new(0, 10, 0, 15)
 AnnounceLabel.BackgroundTransparency = 1
-AnnounceLabel.Text = "📢 SERVER ANNOUNCEMENT"
+AnnounceLabel.Text = "📢 SERVER-WIDE ANNOUNCEMENT"
 AnnounceLabel.Font = Enum.Font.GothamBold
 AnnounceLabel.TextSize = 17
 AnnounceLabel.TextColor3 = Color3.fromRGB(46, 204, 113)
@@ -186,7 +210,7 @@ SendBtn.Parent = AnnounceFrame
 Instance.new("UICorner", SendBtn).CornerRadius = UDim.new(0, 8)
 
 -- ==============================================
--- LOGIC
+-- FUNCTIONS
 -- ==============================================
 OpenBtn.MouseButton1Click:Connect(function()
     MainFrame.Visible = not MainFrame.Visible
@@ -204,35 +228,51 @@ end)
 UnlockBtn.MouseButton1Click:Connect(function()
     local input = KeyInput.Text:upper():gsub("%s+", "")
     if State.UsedKeys[input] then
-        StarterGui:SetCore("SendNotification", {Title = "❌ USED", Text = "This key is already used!", Duration = 3})
+        StarterGui:SetCore("SendNotification", {
+            Title = "❌ KEY USED",
+            Text = "This key can only be used once!",
+            Duration = 3
+        })
         return
     end
-    for _, key in ipairs(Config.ValidKeys) do
-        if input == key then
+    for _, validKey in ipairs(Config.ValidKeys) do
+        if input == validKey then
             State.UsedKeys[input] = true
             State.Unlocked = true
-            StarterGui:SetCore("SendNotification", {Title = "✅ UNLOCKED", Text = "Ready to send announcements!", Duration = 3})
+            StarterGui:SetCore("SendNotification", {
+                Title = "✅ UNLOCKED",
+                Text = "Ready to send announcements!",
+                Duration = 3
+            })
             KeyFrame.Visible = false
             AnnounceFrame.Visible = true
             return
         end
     end
-    StarterGui:SetCore("SendNotification", {Title = "❌ INVALID KEY", Text = "Use a valid STEEL- key!", Duration = 3})
+    StarterGui:SetCore("SendNotification", {
+        Title = "❌ INVALID KEY",
+        Text = "Use a valid STEEL- key!",
+        Duration = 3
+    })
 end)
 
 SendBtn.MouseButton1Click:Connect(function()
     if not State.Unlocked then return end
-    local msg = AnnounceInput.Text
-    if msg == "" then
-        StarterGui:SetCore("SendNotification", {Title = "⚠️ EMPTY", Text = "Type a message first!", Duration = 2})
+    local message = AnnounceInput.Text
+    if message == "" then
+        StarterGui:SetCore("SendNotification", {
+            Title = "⚠️ EMPTY MESSAGE",
+            Text = "Please type something first!",
+            Duration = 2
+        })
         return
     end
     StarterGui:SetCore("SendNotification", {
         Title = "🌐 GLOBAL SERVER ANNOUNCEMENT",
-        Text = msg,
+        Text = message,
         Duration = 7
     })
     AnnounceInput.Text = ""
 end)
 
-print("✅ STEEL ANNOUNCE HUB LOADED")
+print("✅ STEEL ANNOUNCE HUB LOADED SUCCESSFULLY")
