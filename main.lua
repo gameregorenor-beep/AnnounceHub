@@ -1,8 +1,9 @@
 --[[
-📢 GLOBAL SERVER ANNOUNCEMENT
-✅ Shows LARGE at TOP like your image
-🔑 Keys: STEEL-ALPHA to STEEL-ULTIMATE
+📢 GLOBAL ANNOUNCEMENT HUB
+🗂️ Tabs: Get Key + Announcement
+🔑 Keys: STEEL-ALPHA → STEEL-ULTIMATE
 💬 Discord: https://discord.gg/ZhfcPxBvN
+✅ Announcement visible at top like your image
 ]]
 
 -- Services
@@ -11,13 +12,13 @@ local StarterGui = game:GetService("StarterGui")
 local LocalPlayer = Players.LocalPlayer
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
--- Clean old
+-- Clean old version
 if PlayerGui:FindFirstChild("SteelAnnounceHub") then
     PlayerGui.SteelAnnounceHub:Destroy()
 end
 
 -- ==============================================
--- CONFIG
+-- CONFIGURATION
 -- ==============================================
 local Config = {
     DiscordLink = "https://discord.gg/ZhfcPxBvN",
@@ -37,7 +38,7 @@ local State = {
 }
 
 -- ==============================================
--- UI SYSTEM
+-- MAIN UI
 -- ==============================================
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "SteelAnnounceHub"
@@ -46,20 +47,21 @@ ScreenGui.IgnoreGuiInset = true
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.Parent = PlayerGui
 
--- 📢 TOP SCREEN DISPLAY (exactly like your image)
+-- 📢 TOP ANNOUNCEMENT DISPLAY (visible like your image)
 local TopDisplay = Instance.new("TextLabel")
 TopDisplay.Name = "TopAnnounce"
 TopDisplay.Size = UDim2.new(1, 0, 0, 80)
-TopDisplay.Position = UDim2.new(0, 0, 0.02, 0) -- FIXED AT TOP
+TopDisplay.Position = UDim2.new(0, 0, 0.02, 0)
 TopDisplay.BackgroundTransparency = 1
 TopDisplay.Font = Enum.Font.GothamBold
-TopDisplay.TextSize = 36 -- LARGE like example
-TopDisplay.TextColor3 = Color3.new(1, 1, 1) -- White text
-TopDisplay.TextStrokeTransparency = 0 -- Black outline for readability
+TopDisplay.TextSize = 36
+TopDisplay.TextColor3 = Color3.new(1, 1, 1)
+TopDisplay.TextStrokeTransparency = 0
 TopDisplay.TextStrokeColor3 = Color3.new(0, 0, 0)
 TopDisplay.Text = ""
 TopDisplay.Visible = false
 TopDisplay.TextWrapped = true
+TopDisplay.TextAlignment = Enum.TextAlignment.Center
 TopDisplay.Parent = ScreenGui
 
 -- Open Menu Button
@@ -75,10 +77,10 @@ OpenBtn.AutoButtonColor = false
 OpenBtn.Parent = ScreenGui
 Instance.new("UICorner", OpenBtn).CornerRadius = UDim.new(1, 0)
 
--- Main Menu
+-- Main Window
 local MainFrame = Instance.new("Frame")
-MainFrame.Size = UDim2.new(0, 420, 0, 450)
-MainFrame.Position = UDim2.new(0.5, -210, 0.5, -225)
+MainFrame.Size = UDim2.new(0, 450, 0, 480)
+MainFrame.Position = UDim2.new(0.5, -225, 0.5, -240)
 MainFrame.BackgroundColor3 = Color3.fromRGB(20, 25, 35)
 MainFrame.Visible = false
 MainFrame.Active = true
@@ -88,120 +90,199 @@ Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 12)
 Instance.new("UIStroke", MainFrame).Color = Color3.fromRGB(59, 130, 246)
 Instance.new("UIStroke", MainFrame).Thickness = 2
 
--- Title
+-- Window Title
 local Title = Instance.new("TextLabel")
-Title.Size = UDim2.new(1, -20, 0, 50)
+Title.Size = UDim2.new(1, -20, 0, 40)
 Title.Position = UDim2.new(0, 10, 0, 5)
 Title.BackgroundTransparency = 1
-Title.Text = "🌐 GLOBAL SERVER ANNOUNCEMENT"
+Title.Text = "🌐 GLOBAL ANNOUNCEMENT SYSTEM"
 Title.Font = Enum.Font.GothamBold
-Title.TextSize = 20
+Title.TextSize = 19
 Title.TextColor3 = Color3.fromRGB(255, 215, 0)
 Title.Parent = MainFrame
 
 -- ==============================================
--- KEY SYSTEM
+-- TAB BUTTONS
 -- ==============================================
-local KeyFrame = Instance.new("Frame")
-KeyFrame.Size = UDim2.new(1, -20, 1, -70)
-KeyFrame.Position = UDim2.new(0, 10, 0, 55)
-KeyFrame.BackgroundColor3 = Color3.fromRGB(30, 35, 50)
-KeyFrame.Parent = MainFrame
-Instance.new("UICorner", KeyFrame).CornerRadius = UDim.new(0, 10)
+local Tab1Btn = Instance.new("TextButton")
+Tab1Btn.Size = UDim2.new(0.48, -5, 0, 40)
+Tab1Btn.Position = UDim2.new(0.02, 0, 0.12, 0)
+Tab1Btn.BackgroundColor3 = Color3.fromRGB(59, 130, 246)
+Tab1Btn.Text = "🔑 GET KEY"
+Tab1Btn.Font = Enum.Font.GothamBold
+Tab1Btn.TextSize = 16
+Tab1Btn.TextColor3 = Color3.new(1,1,1)
+Tab1Btn.AutoButtonColor = false
+Tab1Btn.Parent = MainFrame
+Instance.new("UICorner", Tab1Btn).CornerRadius = UDim.new(0, 8)
 
-local KeyLabel = Instance.new("TextLabel")
-KeyLabel.Size = UDim2.new(1, -20, 0, 35)
-KeyLabel.Position = UDim2.new(0, 10, 0, 15)
-KeyLabel.BackgroundTransparency = 1
-KeyLabel.Text = "🔑 ENTER STEEL KEY TO UNLOCK"
-KeyLabel.Font = Enum.Font.GothamBold
-KeyLabel.TextSize = 16
-KeyLabel.TextColor3 = Color3.new(1,1,1)
-KeyLabel.Parent = KeyFrame
+local Tab2Btn = Instance.new("TextButton")
+Tab2Btn.Size = UDim2.new(0.48, -5, 0, 40)
+Tab2Btn.Position = UDim2.new(0.5, 5, 0.12, 0)
+Tab2Btn.BackgroundColor3 = Color3.fromRGB(45, 50, 70)
+Tab2Btn.Text = "📢 ANNOUNCEMENT"
+Tab2Btn.Font = Enum.Font.GothamBold
+Tab2Btn.TextSize = 16
+Tab2Btn.TextColor3 = Color3.new(0.7, 0.7, 0.7)
+Tab2Btn.AutoButtonColor = false
+Tab2Btn.Parent = MainFrame
+Instance.new("UICorner", Tab2Btn).CornerRadius = UDim.new(0, 8)
+
+-- ==============================================
+-- TAB 1: GET KEY & INSTRUCTIONS
+-- ==============================================
+local Tab1Frame = Instance.new("Frame")
+Tab1Frame.Size = UDim2.new(0.96, 0, 0.7, 0)
+Tab1Frame.Position = UDim2.new(0.02, 0, 0.22, 0)
+Tab1Frame.BackgroundColor3 = Color3.fromRGB(30, 35, 50)
+Tab1Frame.Parent = MainFrame
+Instance.new("UICorner", Tab1Frame).CornerRadius = UDim.new(0, 8)
+
+local Instructions = Instance.new("TextLabel")
+Instructions.Size = UDim2.new(0.92, 0, 0.7, 0)
+Instructions.Position = UDim2.new(0.04, 0, 0.03, 0)
+Instructions.BackgroundTransparency = 1
+Instructions.Font = Enum.Font.Gotham
+Instructions.TextSize = 15
+Instructions.TextColor3 = Color3.new(1,1,1)
+Instructions.TextWrapped = true
+Instructions.TextAlignment = Enum.TextAlignment.TopLeft
+Instructions.Text = [[
+📋 HOW TO GET YOUR KEY:
+
+1️⃣ What do you write?
+→ Keys are like: STEEL-ALPHA, STEEL-BRAVO, STEEL-OMEGA...
+
+2️⃣ What is the key?
+→ A unique code to unlock the system. You get it from the server.
+
+3️⃣ Enter the server and get the key:
+→ Click the button below to join our Discord server
+→ Complete the poll/verification
+→ Copy your key and paste it here
+]]
+Instructions.Parent = Tab1Frame
+
+local GetKeyBtn = Instance.new("TextButton")
+GetKeyBtn.Size = UDim2.new(0.92, 0, 0.18, 0)
+GetKeyBtn.Position = UDim2.new(0.04, 0, 0.76, 0)
+GetKeyBtn.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
+GetKeyBtn.Text = "🔗 JOIN DISCORD & GET KEY"
+GetKeyBtn.Font = Enum.Font.GothamBold
+GetKeyBtn.TextSize = 16
+GetKeyBtn.TextColor3 = Color3.new(1,1,1)
+GetKeyBtn.AutoButtonColor = false
+GetKeyBtn.Parent = Tab1Frame
+Instance.new("UICorner", GetKeyBtn).CornerRadius = UDim.new(0, 8)
 
 local KeyInput = Instance.new("TextBox")
-KeyInput.Size = UDim2.new(1, -30, 0, 50)
-KeyInput.Position = UDim2.new(0, 15, 0, 55)
+KeyInput.Size = UDim2.new(0.92, 0, 0.15, 0)
+KeyInput.Position = UDim2.new(0.04, 0, 0.57, 0)
 KeyInput.BackgroundColor3 = Color3.fromRGB(45, 50, 70)
-KeyInput.PlaceholderText = "e.g. STEEL-ALPHA"
+KeyInput.PlaceholderText = "Enter your key here (e.g. STEEL-ALPHA)"
 KeyInput.Text = ""
 KeyInput.Font = Enum.Font.Gotham
 KeyInput.TextSize = 15
 KeyInput.TextColor3 = Color3.new(1,1,1)
 KeyInput.ClearTextOnFocus = false
-KeyInput.Parent = KeyFrame
+KeyInput.Parent = Tab1Frame
 Instance.new("UICorner", KeyInput).CornerRadius = UDim.new(0, 8)
 
-local GetKeyBtn = Instance.new("TextButton")
-GetKeyBtn.Size = UDim2.new(1, -30, 0, 45)
-GetKeyBtn.Position = UDim2.new(0, 15, 0, 115)
-GetKeyBtn.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
-GetKeyBtn.Text = "🔗 GET KEY FROM DISCORD"
-GetKeyBtn.Font = Enum.Font.GothamBold
-GetKeyBtn.TextSize = 15
-GetKeyBtn.TextColor3 = Color3.new(1,1,1)
-GetKeyBtn.Parent = KeyFrame
-Instance.new("UICorner", GetKeyBtn).CornerRadius = UDim.new(0, 8)
-
 local UnlockBtn = Instance.new("TextButton")
-UnlockBtn.Size = UDim2.new(1, -30, 0, 45)
-UnlockBtn.Position = UDim2.new(0, 15, 0, 170)
+UnlockBtn.Size = UDim2.new(0.92, 0, 0.15, 0)
+UnlockBtn.Position = UDim2.new(0.04, 0, 0.40, 0)
 UnlockBtn.BackgroundColor3 = Color3.fromRGB(46, 204, 113)
-UnlockBtn.Text = "✅ UNLOCK SYSTEM"
+UnlockBtn.Text = "✅ UNLOCK ANNOUNCEMENT"
 UnlockBtn.Font = Enum.Font.GothamBold
-UnlockBtn.TextSize = 15
+UnlockBtn.TextSize = 16
 UnlockBtn.TextColor3 = Color3.new(1,1,1)
-UnlockBtn.Parent = KeyFrame
+UnlockBtn.AutoButtonColor = false
+UnlockBtn.Parent = Tab1Frame
 Instance.new("UICorner", UnlockBtn).CornerRadius = UDim.new(0, 8)
 
 -- ==============================================
--- ANNOUNCEMENT PANEL
+-- TAB 2: ANNOUNCEMENT
 -- ==============================================
-local AnnounceFrame = Instance.new("Frame")
-AnnounceFrame.Size = UDim2.new(1, -20, 1, -70)
-AnnounceFrame.Position = UDim2.new(0, 10, 0, 55)
-AnnounceFrame.BackgroundColor3 = Color3.fromRGB(30, 35, 50)
-AnnounceFrame.Visible = false
-AnnounceFrame.Parent = MainFrame
-Instance.new("UICorner", AnnounceFrame).CornerRadius = UDim.new(0, 10)
+local Tab2Frame = Instance.new("Frame")
+Tab2Frame.Size = UDim2.new(0.96, 0, 0.7, 0)
+Tab2Frame.Position = UDim2.new(0.02, 0, 0.22, 0)
+Tab2Frame.BackgroundColor3 = Color3.fromRGB(30, 35, 50)
+Tab2Frame.Visible = false
+Tab2Frame.Parent = MainFrame
+Instance.new("UICorner", Tab2Frame).CornerRadius = UDim.new(0, 8)
 
-local AnnounceLabel = Instance.new("TextLabel")
-AnnounceLabel.Size = UDim2.new(1, -20, 0, 35)
-AnnounceLabel.Position = UDim2.new(0, 10, 0, 15)
-AnnounceLabel.BackgroundTransparency = 1
-AnnounceLabel.Text = "📢 TYPE YOUR MESSAGE"
-AnnounceLabel.Font = Enum.Font.GothamBold
-AnnounceLabel.TextSize = 17
-AnnounceLabel.TextColor3 = Color3.fromRGB(46, 204, 113)
-AnnounceLabel.Parent = AnnounceFrame
+local AnnounceInfo = Instance.new("TextLabel")
+AnnounceInfo.Size = UDim2.new(0.92, 0, 0.2, 0)
+AnnounceInfo.Position = UDim2.new(0.04, 0, 0.03, 0)
+AnnounceInfo.BackgroundTransparency = 1
+AnnounceInfo.Font = Enum.Font.GothamBold
+AnnounceInfo.TextSize = 16
+AnnounceInfo.TextColor3 = Color3.fromRGB(46, 204, 113)
+AnnounceInfo.Text = [[
+📢 ANNOUNCEMENT
+✏️ Write what you want below
+👁️ This will be visible to everyone on screen
+]]
+AnnounceInfo.TextWrapped = true
+AnnounceInfo.Parent = Tab2Frame
 
 local AnnounceInput = Instance.new("TextBox")
-AnnounceInput.Size = UDim2.new(1, -30, 0, 120)
-AnnounceInput.Position = UDim2.new(0, 15, 0, 55)
+AnnounceInput.Size = UDim2.new(0.92, 0, 0.5, 0)
+AnnounceInput.Position = UDim2.new(0.04, 0, 0.25, 0)
 AnnounceInput.BackgroundColor3 = Color3.fromRGB(45, 50, 70)
-AnnounceInput.PlaceholderText = "Example: only 7k steaks left"
+AnnounceInput.PlaceholderText = "Example: only 7k steaks left\nType any message here..."
 AnnounceInput.Text = ""
 AnnounceInput.Font = Enum.Font.Gotham
 AnnounceInput.TextSize = 16
 AnnounceInput.TextColor3 = Color3.new(1,1,1)
 AnnounceInput.TextWrapped = true
 AnnounceInput.MultiLine = true
-AnnounceInput.Parent = AnnounceFrame
+AnnounceInput.Parent = Tab2Frame
 Instance.new("UICorner", AnnounceInput).CornerRadius = UDim.new(0, 8)
 
 local SendBtn = Instance.new("TextButton")
-SendBtn.Size = UDim2.new(1, -30, 0, 45)
-SendBtn.Position = UDim2.new(0, 15, 0, 185)
+SendBtn.Size = UDim2.new(0.92, 0, 0.18, 0)
+SendBtn.Position = UDim2.new(0.04, 0, 0.78, 0)
 SendBtn.BackgroundColor3 = Color3.fromRGB(241, 196, 15)
-SendBtn.Text = "🌐 SHOW AT TOP"
+SendBtn.Text = "🌐 SHOW TO EVERYONE"
 SendBtn.Font = Enum.Font.GothamBold
-SendBtn.TextSize = 16
+SendBtn.TextSize = 17
 SendBtn.TextColor3 = Color3.new(0,0,0)
-SendBtn.Parent = AnnounceFrame
+SendBtn.AutoButtonColor = false
+SendBtn.Parent = Tab2Frame
 Instance.new("UICorner", SendBtn).CornerRadius = UDim.new(0, 8)
 
 -- ==============================================
--- LOGIC
+-- TAB SWITCH LOGIC
+-- ==============================================
+Tab1Btn.MouseButton1Click:Connect(function()
+    Tab1Frame.Visible = true
+    Tab2Frame.Visible = false
+    Tab1Btn.BackgroundColor3 = Color3.fromRGB(59, 130, 246)
+    Tab1Btn.TextColor3 = Color3.new(1,1,1)
+    Tab2Btn.BackgroundColor3 = Color3.fromRGB(45, 50, 70)
+    Tab2Btn.TextColor3 = Color3.new(0.7, 0.7, 0.7)
+end)
+
+Tab2Btn.MouseButton1Click:Connect(function()
+    if not State.Unlocked then
+        StarterGui:SetCore("SendNotification", {
+            Title = "❌ LOCKED",
+            Text = "Unlock first using a valid key!",
+            Duration = 3
+        })
+        return
+    end
+    Tab1Frame.Visible = false
+    Tab2Frame.Visible = true
+    Tab2Btn.BackgroundColor3 = Color3.fromRGB(59, 130, 246)
+    Tab2Btn.TextColor3 = Color3.new(1,1,1)
+    Tab1Btn.BackgroundColor3 = Color3.fromRGB(45, 50, 70)
+    Tab1Btn.TextColor3 = Color3.new(0.7, 0.7, 0.7)
+end)
+
+-- ==============================================
+-- FUNCTIONS
 -- ==============================================
 OpenBtn.MouseButton1Click:Connect(function()
     MainFrame.Visible = not MainFrame.Visible
@@ -211,7 +292,7 @@ GetKeyBtn.MouseButton1Click:Connect(function()
     setclipboard(Config.DiscordLink)
     StarterGui:SetCore("SendNotification", {
         Title = "✅ LINK COPIED",
-        Text = "Join Discord to get your key!",
+        Text = "Paste it in browser to join Discord",
         Duration = 3
     })
 end)
@@ -219,39 +300,51 @@ end)
 UnlockBtn.MouseButton1Click:Connect(function()
     local input = KeyInput.Text:upper():gsub("%s+", "")
     if State.UsedKeys[input] then
-        StarterGui:SetCore("SendNotification", {Title = "❌ USED", Text = "This key can only be used once!", Duration = 3})
+        StarterGui:SetCore("SendNotification", {
+            Title = "❌ KEY USED",
+            Text = "This key can only be used once!",
+            Duration = 3
+        })
         return
     end
     for _, key in ipairs(Config.ValidKeys) do
         if input == key then
             State.UsedKeys[input] = true
             State.Unlocked = true
-            StarterGui:SetCore("SendNotification", {Title = "✅ UNLOCKED", Text = "Ready to show announcements!", Duration = 3})
-            KeyFrame.Visible = false
-            AnnounceFrame.Visible = true
+            StarterGui:SetCore("SendNotification", {
+                Title = "✅ UNLOCKED",
+                Text = "You can now use the Announcement tab!",
+                Duration = 3
+            })
             return
         end
     end
-    StarterGui:SetCore("SendNotification", {Title = "❌ INVALID KEY", Text = "Use a valid STEEL- key!", Duration = 3})
+    StarterGui:SetCore("SendNotification", {
+        Title = "❌ INVALID KEY",
+        Text = "Use a valid STEEL-XXXX key!",
+        Duration = 3
+    })
 end)
 
--- ✅ SEND FUNCTION (shows exactly like your image)
 SendBtn.MouseButton1Click:Connect(function()
     if not State.Unlocked then return end
     local msg = AnnounceInput.Text
     if msg == "" then
-        StarterGui:SetCore("SendNotification", {Title = "⚠️ EMPTY", Text = "Type your message first!", Duration = 2})
+        StarterGui:SetCore("SendNotification", {
+            Title = "⚠️ EMPTY MESSAGE",
+            Text = "Type what you want first!",
+            Duration = 2
+        })
         return
     end
 
-    -- Show message LARGE AT TOP like your example
+    -- Show large at top for everyone to see
     TopDisplay.Text = msg
     TopDisplay.Visible = true
 
-    -- Hide after 5 seconds
-    task.wait(5)
+    task.wait(6)
     TopDisplay.Visible = false
     AnnounceInput.Text = ""
 end)
 
-print("✅ TOP ANNOUNCE HUB READY")
+print("✅ HUB LOADED SUCCESSFULLY")
