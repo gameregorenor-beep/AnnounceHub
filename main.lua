@@ -2,7 +2,7 @@
 📢 GLOBAL SERVER ANNOUNCEMENT HUB
 🔑 Valid Keys: STEEL-ALPHA to STEEL-ULTIMATE
 💬 Official Discord: https://discord.gg/ZhfcPxBvN
-⚠️ For educational purposes only
+⚠️ Educational use only
 ]]
 
 -- Services
@@ -138,7 +138,7 @@ KeyInput.Font = Enum.Font.Gotham
 KeyInput.TextSize = 15
 KeyInput.TextColor3 = Color3.new(1,1,1)
 KeyInput.ClearTextOnFocus = false
-KeyInput.Parent = KeyFrame
+KeyInput.Parent = KeyInput
 Instance.new("UICorner", KeyInput).CornerRadius = UDim.new(0, 8)
 
 local GetKeyBtn = Instance.new("TextButton")
