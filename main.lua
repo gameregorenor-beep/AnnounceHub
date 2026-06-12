@@ -1,8 +1,8 @@
 --[[
-📢 GLOBAL SERVER ANNOUNCEMENT HUB
-🔑 Valid Keys: STEEL-ALPHA → STEEL-ULTIMATE
+📢 GLOBAL SERVER ANNOUNCEMENT
+✅ Shows LARGE at TOP like your image
+🔑 Keys: STEEL-ALPHA to STEEL-ULTIMATE
 💬 Discord: https://discord.gg/ZhfcPxBvN
-⚠️ Educational purpose only
 ]]
 
 -- Services
@@ -11,65 +11,58 @@ local StarterGui = game:GetService("StarterGui")
 local LocalPlayer = Players.LocalPlayer
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
--- Remove old version
+-- Clean old
 if PlayerGui:FindFirstChild("SteelAnnounceHub") then
     PlayerGui.SteelAnnounceHub:Destroy()
 end
 
 -- ==============================================
--- CONFIGURATION
+-- CONFIG
 -- ==============================================
 local Config = {
     DiscordLink = "https://discord.gg/ZhfcPxBvN",
     ValidKeys = {
-        "STEEL-ALPHA",
-        "STEEL-BRAVO",
-        "STEEL-CHARLIE",
-        "STEEL-DELTA",
-        "STEEL-ECHO",
-        "STEEL-FOXTROT",
-        "STEEL-GOLF",
-        "STEEL-HOTEL",
-        "STEEL-INDIA",
-        "STEEL-JULIET",
-        "STEEL-KILO",
-        "STEEL-LIMA",
-        "STEEL-MIKE",
-        "STEEL-NOVEMBER",
-        "STEEL-OSCAR",
-        "STEEL-PAPA",
-        "STEEL-QUEBEC",
-        "STEEL-ROMEO",
-        "STEEL-SIERRA",
-        "STEEL-TANGO",
-        "STEEL-UNIFORM",
-        "STEEL-VICTOR",
-        "STEEL-WHISKEY",
-        "STEEL-XRAY",
-        "STEEL-YANKEE",
-        "STEEL-ZULU",
-        "STEEL-OMEGA",
-        "STEEL-LEGEND",
-        "STEEL-PRIME",
-        "STEEL-ULTIMATE"
+        "STEEL-ALPHA", "STEEL-BRAVO", "STEEL-CHARLIE", "STEEL-DELTA", "STEEL-ECHO",
+        "STEEL-FOXTROT", "STEEL-GOLF", "STEEL-HOTEL", "STEEL-INDIA", "STEEL-JULIET",
+        "STEEL-KILO", "STEEL-LIMA", "STEEL-MIKE", "STEEL-NOVEMBER", "STEEL-OSCAR",
+        "STEEL-PAPA", "STEEL-QUEBEC", "STEEL-ROMEO", "STEEL-SIERRA", "STEEL-TANGO",
+        "STEEL-UNIFORM", "STEEL-VICTOR", "STEEL-WHISKEY", "STEEL-XRAY", "STEEL-YANKEE",
+        "STEEL-ZULU", "STEEL-OMEGA", "STEEL-LEGEND", "STEEL-PRIME", "STEEL-ULTIMATE"
     }
 }
 
 local State = {
     Unlocked = false,
-    UsedKeys = {} -- Prevents same key reuse
+    UsedKeys = {}
 }
 
 -- ==============================================
--- USER INTERFACE
+-- UI SYSTEM
 -- ==============================================
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "SteelAnnounceHub"
 ScreenGui.ResetOnSpawn = false
 ScreenGui.IgnoreGuiInset = true
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.Parent = PlayerGui
 
--- Open/Close Button
+-- 📢 TOP SCREEN DISPLAY (exactly like your image)
+local TopDisplay = Instance.new("TextLabel")
+TopDisplay.Name = "TopAnnounce"
+TopDisplay.Size = UDim2.new(1, 0, 0, 80)
+TopDisplay.Position = UDim2.new(0, 0, 0.02, 0) -- FIXED AT TOP
+TopDisplay.BackgroundTransparency = 1
+TopDisplay.Font = Enum.Font.GothamBold
+TopDisplay.TextSize = 36 -- LARGE like example
+TopDisplay.TextColor3 = Color3.new(1, 1, 1) -- White text
+TopDisplay.TextStrokeTransparency = 0 -- Black outline for readability
+TopDisplay.TextStrokeColor3 = Color3.new(0, 0, 0)
+TopDisplay.Text = ""
+TopDisplay.Visible = false
+TopDisplay.TextWrapped = true
+TopDisplay.Parent = ScreenGui
+
+-- Open Menu Button
 local OpenBtn = Instance.new("TextButton")
 OpenBtn.Size = UDim2.new(0, 60, 0, 60)
 OpenBtn.Position = UDim2.new(0.02, 0, 0.35, 0)
@@ -82,20 +75,18 @@ OpenBtn.AutoButtonColor = false
 OpenBtn.Parent = ScreenGui
 Instance.new("UICorner", OpenBtn).CornerRadius = UDim.new(1, 0)
 
--- Main Window
+-- Main Menu
 local MainFrame = Instance.new("Frame")
-MainFrame.Size = UDim2.new(0, 420, 0, 440)
-MainFrame.Position = UDim2.new(0.5, -210, 0.5, -220)
-MainFrame.BackgroundColor3 = Color3.fromRGB(22, 27, 36)
+MainFrame.Size = UDim2.new(0, 420, 0, 450)
+MainFrame.Position = UDim2.new(0.5, -210, 0.5, -225)
+MainFrame.BackgroundColor3 = Color3.fromRGB(20, 25, 35)
 MainFrame.Visible = false
 MainFrame.Active = true
 MainFrame.Draggable = true
 MainFrame.Parent = ScreenGui
 Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 12)
-local Stroke = Instance.new("UIStroke")
-Stroke.Color = Color3.fromRGB(59, 130, 246)
-Stroke.Thickness = 2
-Stroke.Parent = MainFrame
+Instance.new("UIStroke", MainFrame).Color = Color3.fromRGB(59, 130, 246)
+Instance.new("UIStroke", MainFrame).Thickness = 2
 
 -- Title
 local Title = Instance.new("TextLabel")
@@ -164,7 +155,7 @@ UnlockBtn.Parent = KeyFrame
 Instance.new("UICorner", UnlockBtn).CornerRadius = UDim.new(0, 8)
 
 -- ==============================================
--- ANNOUNCEMENT SYSTEM
+-- ANNOUNCEMENT PANEL
 -- ==============================================
 local AnnounceFrame = Instance.new("Frame")
 AnnounceFrame.Size = UDim2.new(1, -20, 1, -70)
@@ -178,7 +169,7 @@ local AnnounceLabel = Instance.new("TextLabel")
 AnnounceLabel.Size = UDim2.new(1, -20, 0, 35)
 AnnounceLabel.Position = UDim2.new(0, 10, 0, 15)
 AnnounceLabel.BackgroundTransparency = 1
-AnnounceLabel.Text = "📢 SERVER-WIDE ANNOUNCEMENT"
+AnnounceLabel.Text = "📢 TYPE YOUR MESSAGE"
 AnnounceLabel.Font = Enum.Font.GothamBold
 AnnounceLabel.TextSize = 17
 AnnounceLabel.TextColor3 = Color3.fromRGB(46, 204, 113)
@@ -188,10 +179,10 @@ local AnnounceInput = Instance.new("TextBox")
 AnnounceInput.Size = UDim2.new(1, -30, 0, 120)
 AnnounceInput.Position = UDim2.new(0, 15, 0, 55)
 AnnounceInput.BackgroundColor3 = Color3.fromRGB(45, 50, 70)
-AnnounceInput.PlaceholderText = "Type here... e.g. only 7k steaks left"
+AnnounceInput.PlaceholderText = "Example: only 7k steaks left"
 AnnounceInput.Text = ""
 AnnounceInput.Font = Enum.Font.Gotham
-AnnounceInput.TextSize = 15
+AnnounceInput.TextSize = 16
 AnnounceInput.TextColor3 = Color3.new(1,1,1)
 AnnounceInput.TextWrapped = true
 AnnounceInput.MultiLine = true
@@ -202,15 +193,15 @@ local SendBtn = Instance.new("TextButton")
 SendBtn.Size = UDim2.new(1, -30, 0, 45)
 SendBtn.Position = UDim2.new(0, 15, 0, 185)
 SendBtn.BackgroundColor3 = Color3.fromRGB(241, 196, 15)
-SendBtn.Text = "🌐 SEND GLOBAL ANNOUNCEMENT"
+SendBtn.Text = "🌐 SHOW AT TOP"
 SendBtn.Font = Enum.Font.GothamBold
-SendBtn.TextSize = 15
+SendBtn.TextSize = 16
 SendBtn.TextColor3 = Color3.new(0,0,0)
 SendBtn.Parent = AnnounceFrame
 Instance.new("UICorner", SendBtn).CornerRadius = UDim.new(0, 8)
 
 -- ==============================================
--- FUNCTIONS
+-- LOGIC
 -- ==============================================
 OpenBtn.MouseButton1Click:Connect(function()
     MainFrame.Visible = not MainFrame.Visible
@@ -228,51 +219,39 @@ end)
 UnlockBtn.MouseButton1Click:Connect(function()
     local input = KeyInput.Text:upper():gsub("%s+", "")
     if State.UsedKeys[input] then
-        StarterGui:SetCore("SendNotification", {
-            Title = "❌ KEY USED",
-            Text = "This key can only be used once!",
-            Duration = 3
-        })
+        StarterGui:SetCore("SendNotification", {Title = "❌ USED", Text = "This key can only be used once!", Duration = 3})
         return
     end
-    for _, validKey in ipairs(Config.ValidKeys) do
-        if input == validKey then
+    for _, key in ipairs(Config.ValidKeys) do
+        if input == key then
             State.UsedKeys[input] = true
             State.Unlocked = true
-            StarterGui:SetCore("SendNotification", {
-                Title = "✅ UNLOCKED",
-                Text = "Ready to send announcements!",
-                Duration = 3
-            })
+            StarterGui:SetCore("SendNotification", {Title = "✅ UNLOCKED", Text = "Ready to show announcements!", Duration = 3})
             KeyFrame.Visible = false
             AnnounceFrame.Visible = true
             return
         end
     end
-    StarterGui:SetCore("SendNotification", {
-        Title = "❌ INVALID KEY",
-        Text = "Use a valid STEEL- key!",
-        Duration = 3
-    })
+    StarterGui:SetCore("SendNotification", {Title = "❌ INVALID KEY", Text = "Use a valid STEEL- key!", Duration = 3})
 end)
 
+-- ✅ SEND FUNCTION (shows exactly like your image)
 SendBtn.MouseButton1Click:Connect(function()
     if not State.Unlocked then return end
-    local message = AnnounceInput.Text
-    if message == "" then
-        StarterGui:SetCore("SendNotification", {
-            Title = "⚠️ EMPTY MESSAGE",
-            Text = "Please type something first!",
-            Duration = 2
-        })
+    local msg = AnnounceInput.Text
+    if msg == "" then
+        StarterGui:SetCore("SendNotification", {Title = "⚠️ EMPTY", Text = "Type your message first!", Duration = 2})
         return
     end
-    StarterGui:SetCore("SendNotification", {
-        Title = "🌐 GLOBAL SERVER ANNOUNCEMENT",
-        Text = message,
-        Duration = 7
-    })
+
+    -- Show message LARGE AT TOP like your example
+    TopDisplay.Text = msg
+    TopDisplay.Visible = true
+
+    -- Hide after 5 seconds
+    task.wait(5)
+    TopDisplay.Visible = false
     AnnounceInput.Text = ""
 end)
 
-print("✅ STEEL ANNOUNCE HUB LOADED SUCCESSFULLY")
+print("✅ TOP ANNOUNCE HUB READY")
